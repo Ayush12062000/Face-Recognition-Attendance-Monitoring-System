@@ -1,6 +1,6 @@
 # Face-Recognition-Attendance-Monitoring-System
 
-Approach:
+## Approach:
 1. look at a picture and find all the faces in it.
 2. Focus on each face and understand that even if a face is 
    turned in a different direction or in bad lighting, it is still the same person.
@@ -10,7 +10,7 @@ Approach:
    to determine the person’s name.
 
 
-Techniques used:
+## Techniques used:
 a.) HOG (Histogram of Oriented Gradients) algorithm for finding faces
 b.) Generate Facial landmarks for faces posing and projected at different angles.
 c.) 128 different measurements of a image generated. using these measurements 
