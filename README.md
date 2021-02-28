@@ -11,7 +11,7 @@
 
 
 ## Techniques used:
-a.) HOG (Histogram of Oriented Gradients) algorithm for finding faces
+a.) HOG (Histogram of Oriented Gradients) algorithm for finding faces.
 b.) Generate Facial landmarks for faces posing and projected at different angles.
 c.) 128 different measurements of a image generated. using these measurements 
 	we can define a person, and differentiate b/w people as well.
