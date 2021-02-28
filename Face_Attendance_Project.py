@@ -63,8 +63,6 @@ def attendance(name):
 
 #finding encodeings of known faces
 encodelistknown = findencodings(images)
-#print(len(encodelistknown))
-print("------- Encoding Completed -------")
 
 #initialising webcam
 cap = cv2.VideoCapture(0)
