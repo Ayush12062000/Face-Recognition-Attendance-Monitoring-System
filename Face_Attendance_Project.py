@@ -72,24 +72,25 @@ while True:
     imgS = cv2.resize(img,(0,0),None,0.25,0.25)  #to speed up the process resizing the image to one-forth of the original size
     imgS = cv2.cvtColor(imgS,cv2.COLOR_BGR2RGB)
     #we might find multiple faces so now finding face locations and then fnding encodings
-    faceincurframe = face_recognition.face_locations(imgS)
-    encodecurframe = face_recognition.face_encodings(imgS,faceincurframe)
+    faceincurframe = face_recognition.face_locations(imgS)              #getting locations of the faces which we get from webcam
+    encodecurframe = face_recognition.face_encodings(imgS,faceincurframe)           #getting encodings
 
     #now we will compare faces by iterating through all faces and check in known faces to get results
     for encodeface,faceloc in zip(encodecurframe,faceincurframe):
-        matches = face_recognition.compare_faces(encodelistknown, encodeface)
-        facedis = face_recognition.face_distance(encodelistknown, encodeface)
+        matches = face_recognition.compare_faces(encodelistknown, encodeface)      #matching faces found in the frame with known faces
+        facedis = face_recognition.face_distance(encodelistknown, encodeface)       #measuring distance -Gives a list of face encodings, compare them to a known face encoding and get a euclidean distance for each comparison face. The distance tells you how similar the faces are.
         #print(facedis)
-        matchindex = np.argmin(facedis)
+        matchindex = np.argmin(facedis)      #minimum the distance better the match
 
         if matches[matchindex]:
             name = classnames[matchindex].upper()
             #print(name)
             y1,x2,y2,x1 = faceloc
             y1,x2,y2,x1 = y1*4,x2*4,y2*4,x1*4      # multiplying by 4 as earlier we resized our image to 1/4
-            cv2.rectangle(img, (x1,y1), (x2,y2), (0,255,0) ,2)
-            cv2.rectangle(img , (x1,y2-30), (x2,y2), (0,255,0) ,cv2.FILLED)
-            cv2.putText(img,name,(x1+4,y2-4),cv2.FONT_HERSHEY_PLAIN,1,(0,0,0),2)
+            #putting results on the image
+            cv2.rectangle(img, (x1,y1), (x2,y2), (0,255,0) ,2)   #Hollow rectangle around the face
+            cv2.rectangle(img , (x1,y2-30), (x2,y2), (0,255,0) ,cv2.FILLED)  #Filled rectangle below hollow rectangle to print name on it
+            cv2.putText(img,name,(x1+4,y2-4),cv2.FONT_HERSHEY_PLAIN,1,(0,0,0),2)    
             attendance(name)
 
     cv2.imshow("Webcam" , img)
